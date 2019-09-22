@@ -179,7 +179,7 @@ func (self *Tunnel) startTunnel() error {
 	replyCh := make(chan int, self.assignedUrlInfo.MaxConnCount)
 	remoteHost := url.Host
 	for i := 0; i < self.assignedUrlInfo.MaxConnCount; i++ {
-		tunnelConn := NewTunnelConn(remoteHost, self.assignedUrlInfo.Port, self.localPort)
+		tunnelConn := NewTunnelConn(remoteHost, self.assignedUrlInfo.Port, self.localAdapter, self.localPort)
 		self.tunnelConns[i] = tunnelConn
 		go tunnelConn.Tunnel(replyCh)
 	}
