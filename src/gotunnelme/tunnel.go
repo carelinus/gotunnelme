@@ -145,7 +145,7 @@ func (self *TunnelConn) connectRemote() (net.Conn, error) {
 }
 
 func (self *TunnelConn) connectLocal() (net.Conn, error) {
-	localAddr := fmt.Sprintf("%s:%d", self.localAdapter, self.localPort)
+	localAddr := fmt.Sprintf("%s:%d", self.localAddress, self.localPort)
 	return net.Dial("tcp", localAddr)
 }
 
