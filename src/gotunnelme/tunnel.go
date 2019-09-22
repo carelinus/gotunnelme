@@ -203,7 +203,7 @@ fmt.Printf("5")
 }
 
 func (self *Tunnel) checkLocalPort() error {
-	localAddr := fmt.Sprintf("%s:%d", "localhost", self.localPort)
+	localAddr := fmt.Sprintf("%s:%d", self.localAddress, self.localPort)
 	c, err := net.Dial("tcp", localAddr)
 	if err != nil {
 		return errors.New("can't connect local port!")
