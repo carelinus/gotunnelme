@@ -18,17 +18,17 @@ type TunnelConn struct {
 	remoteHost   string
 	remotePort   int
 	localPort    int
-	localAdapter string
+	localAddress string
 	remoteConn   net.Conn
 	localConn    net.Conn
 	errorChannel chan error
 }
 
-func NewTunnelConn(remoteHost string, remotePort, localAdapter, localPort int) *TunnelConn {
+func NewTunnelConn(remoteHost string, remotePort, localAddress, localPort int) *TunnelConn {
 	tunnelConn := &TunnelConn{}
 	tunnelConn.remoteHost = remoteHost
 	tunnelConn.remotePort = remotePort
-	tunnelConn.localAdapter = localAdapter
+	tunnelConn.localAddress = localAddress
 	tunnelConn.localPort = localPort
 	return tunnelConn
 }
@@ -179,7 +179,7 @@ func (self *Tunnel) startTunnel() error {
 	replyCh := make(chan int, self.assignedUrlInfo.MaxConnCount)
 	remoteHost := url.Host
 	for i := 0; i < self.assignedUrlInfo.MaxConnCount; i++ {
-		tunnelConn := NewTunnelConn(remoteHost, self.assignedUrlInfo.Port, self.localAdapter, self.localPort)
+		tunnelConn := NewTunnelConn(remoteHost, self.assignedUrlInfo.Port, self.localAddress, self.localPort)
 		self.tunnelConns[i] = tunnelConn
 		go tunnelConn.Tunnel(replyCh)
 	}
