@@ -18,15 +18,17 @@ type TunnelConn struct {
 	remoteHost   string
 	remotePort   int
 	localPort    int
+	localAdapter string
 	remoteConn   net.Conn
 	localConn    net.Conn
 	errorChannel chan error
 }
 
-func NewTunnelConn(remoteHost string, remotePort, localPort int) *TunnelConn {
+func NewTunnelConn(remoteHost string, remotePort, localAdapter, localPort int) *TunnelConn {
 	tunnelConn := &TunnelConn{}
 	tunnelConn.remoteHost = remoteHost
 	tunnelConn.remotePort = remotePort
+	tunnelConn.localAdapter = localAdapter
 	tunnelConn.localPort = localPort
 	return tunnelConn
 }
@@ -143,7 +145,7 @@ func (self *TunnelConn) connectRemote() (net.Conn, error) {
 }
 
 func (self *TunnelConn) connectLocal() (net.Conn, error) {
-	localAddr := fmt.Sprintf("%s:%d", "localhost", self.localPort)
+	localAddr := fmt.Sprintf("%s:%d", self.localAdapter, self.localPort)
 	return net.Dial("tcp", localAddr)
 }
 
