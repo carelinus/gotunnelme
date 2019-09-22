@@ -158,6 +158,7 @@ const (
 type Tunnel struct {
 	assignedUrlInfo *AssignedUrlInfo
 	localPort       int
+	localAddress    string
 	tunnelConns     []*TunnelConn
 	cmdChan         chan TunnelCommand
 }
