@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/NoahShen/gotunnelme/src/gotunnelme"
+	"github.com/lttlrck/gotunnelme/src/gotunnelme"
 	"os"
 	"strconv"
 )
