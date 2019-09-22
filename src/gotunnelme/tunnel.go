@@ -232,7 +232,8 @@ func (self *Tunnel) GetUrl(assignedDomain string) (string, error) {
 	return assignedUrlInfo.Url, nil
 }
 
-func (self *Tunnel) CreateTunnel(localPort int) error {
+func (self *Tunnel) CreateTunnel(localAddress string, localPort int) error {
 	self.localPort = localPort
+	self.localAddress = localAddress
 	return self.startTunnel()
 }
