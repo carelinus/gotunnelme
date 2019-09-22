@@ -170,16 +170,13 @@ func NewTunnel() *Tunnel {
 }
 
 func (self *Tunnel) startTunnel() error {
-	fmt.Printf("1")
 	if err := self.checkLocalPort(); err != nil {
 		return err
 	}
-	fmt.Printf("2")
 	url, parseErr := url.Parse(localtunnelServer)
 	if parseErr != nil {
 		return parseErr
 	}
-	fmt.Printf("3")
 	replyCh := make(chan int, self.assignedUrlInfo.MaxConnCount)
 	remoteHost := url.Host
 	for i := 0; i < self.assignedUrlInfo.MaxConnCount; i++ {
@@ -198,7 +195,7 @@ L:
 			}
 		}
 	}
-fmt.Printf("5")
+
 	return nil
 }
 
