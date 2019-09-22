@@ -24,7 +24,7 @@ type TunnelConn struct {
 	errorChannel chan error
 }
 
-func NewTunnelConn(remoteHost string, remotePort, localAddress, localPort int) *TunnelConn {
+func NewTunnelConn(remoteHost string, remotePort int, localAddress string, localPort int) *TunnelConn {
 	tunnelConn := &TunnelConn{}
 	tunnelConn.remoteHost = remoteHost
 	tunnelConn.remotePort = remotePort
