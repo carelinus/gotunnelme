@@ -9,10 +9,11 @@ import (
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Fprintln(os.Stderr, "gotunnelme <local port>")
+		fmt.Fprintln(os.Stderr, "gotunnelme <local address> <local port>")
 		os.Exit(1)
 	}
-	i, err := strconv.Atoi(os.Args[1])
+	address := os.Args[1]
+	i, err := strconv.Atoi(os.Args[2])
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
@@ -23,7 +24,7 @@ func main() {
 		panic(err)
 	}
 	print(url)
-	err = t.CreateTunnel(i)
+	err = t.CreateTunnel(address, i)
 	if err != nil {
 		panic(err)
 	}
