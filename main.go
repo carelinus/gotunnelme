@@ -2,14 +2,25 @@ package main
 
 import (
 	"fmt"
-	"github.com/lttlrck/gotunnelme/src/gotunnelme"
 	"os"
 	"strconv"
+
+	"github.com/carelinus/gotunnelme/src/gotunnelme"
+)
+
+// nolint: gochecknoglobals
+var (
+	version = "dev"
+	commit  = ""
+	date    = ""
+	builtBy = ""
 )
 
 func main() {
+
 	if len(os.Args) == 1 {
 		fmt.Fprintln(os.Stderr, "gotunnelme <local address> <local port>")
+		fmt.Fprintln(os.Stderr, "\nVersion:\n"+buildVersion(version, commit, date, builtBy))
 		os.Exit(1)
 	}
 	address := os.Args[1]
@@ -29,4 +40,18 @@ func main() {
 		panic(err)
 	}
 	t.StopTunnel()
+}
+
+func buildVersion(version, commit, date, builtBy string) string {
+	result := version
+	if commit != "" {
+		result = fmt.Sprintf("%s\ncommit: %s", result, commit)
+	}
+	if date != "" {
+		result = fmt.Sprintf("%s\nbuilt at: %s", result, date)
+	}
+	if builtBy != "" {
+		result = fmt.Sprintf("%s\nbuilt by: %s", result, builtBy)
+	}
+	return result
 }
